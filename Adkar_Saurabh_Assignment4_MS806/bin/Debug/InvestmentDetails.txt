@@ -1,0 +1,41 @@
+TRANSACTION_START
+Transaction Number :409758
+Customer Name :saurabh
+Customer Telephone :12345
+Customer Email :saurabh@gmail.com
+Amount Invested :250000
+Tenure of the deposit :3 Years
+Interest Rate :0.62500
+Total Accured Amount :254731.31
+TRANSACTION_END
+TRANSACTION_START
+Transaction Number :869745
+Customer Name :john
+Customer Telephone :54321
+Customer Email :john@gmail.com
+Amount Invested :600000
+Tenure of the deposit :10 Years
+Interest Rate :1.02500
+Total Accured Amount :664759.47
+TRANSACTION_END
+TRANSACTION_START
+Transaction Number :559650
+Customer Name :ron
+Customer Telephone :678910
+Customer Email :ron@gmail.com
+Amount Invested :1000001
+Tenure of the deposit :5 Years
+Interest Rate :0.81250
+Total Accured Amount :1066459.66
+TRANSACTION_END
+TRANSACTION_START
+Transaction Number :290946
+Customer Name :saurabh
+Customer Telephone :12345
+Customer Email :saurabh@gmail.com
+Amount Invested :1500000
+Tenure of the deposit :3 Years
+Interest Rate :0.72500
+Total Accured Amount :1557979.03
+TRANSACTION_END
+

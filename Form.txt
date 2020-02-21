@@ -1,0 +1,279 @@
+﻿using System;
+using System.Windows.Forms;
+using Microsoft.VisualBasic;
+using System.IO;
+using System.Text.RegularExpressions;
+
+namespace WindowsFormsApp1
+{
+    public partial class Form1 : Form
+    {
+        decimal value;
+
+        decimal INTEREST_RATE_1_YEAR = 0m, INTEREST_RATE_3_YEARS = 0.62500m, INTEREST_RATE_5_YEARS = 0.71250m, INTEREST_RATE_10_YEARS = 1.01250m;
+
+        const string term_1 = "1 Year", term_3 = "3 Years", term_5 = "5 Years", term_10 = "10 Years";
+
+        decimal totalOfOneYear = 0m, totalOfThreeYears = 0m, totalOfFiveYears = 0m, totalOfTenYears = 0m;
+
+        string tenure, customerName="", customerTelephone="", customerEmail="", transactionNumber = "";
+
+        string enteredText, searchText = "",line;
+
+        string path = @"D:\\MSc Business Analytics\\Sem 1\\MS806 Business Applications Programming\\Assignment\\Assignment 4\\WindowsFormsApp1\\InvestmentDetails.txt";
+
+
+
+        decimal interestRate = 0m;
+        decimal accuredAmount = 0m;
+
+        public static Regex re = new Regex(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$",
+                                               RegexOptions.CultureInvariant | RegexOptions.Singleline);
+        public static bool IsValidEmailFormat(string enteredText)
+        {
+            return re.IsMatch(enteredText);
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            enteredText = searchTextBox.Text;
+
+            if (re.IsMatch(enteredText) || Int32.TryParse(searchTextBox.Text, out int value))
+            {
+                searchText = File.ReadAllText(path);
+                
+
+                bool condition = false;
+
+                for (int i = 0; i < searchText.Length; i++)
+                {
+                    if (searchText.Contains(enteredText) == true)
+                    {
+                        condition = true;
+                        MessageBox.Show(enteredText + " Record Found ", "Search Successfull", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    }
+                    else
+                    {
+                        condition = false;
+                        MessageBox.Show(enteredText + " Record not found ", "Search Unsuccessfull", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }
+                }
+            }
+
+            else
+            {
+                MessageBox.Show("Please Enter Valid email address or Transaction number", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+        }
+
+
+        private void proceedButton_Click(object sender, EventArgs e)
+        {
+
+            if (termInterestRateTable.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please choose a term you wish to invest for", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); //to display error message if any event is not selected 
+                termInterestRateTable.Focus();
+            }
+            
+            else
+            {
+                amountTextBox.Visible = false;
+                amountToBeInvestedLabel.Visible = false;
+                displayButton.Visible = false;
+                termInterestRateTable.Visible = false;
+                termLabel.Visible = false;
+                interestRateLabel.Visible = false;
+                accuredAmountLabel.Visible = false;
+                proceedButton.Visible = false;
+                customerDetailsGroupBox.Visible = true;
+
+                Random r = new Random();
+                int randNum = r.Next(1000000);
+                transactionNumber = randNum.ToString("D6");
+
+                switch (termInterestRateTable.SelectedIndex)
+                {
+                    case 0:
+                        tenure = term_1;
+                        interestRate = INTEREST_RATE_1_YEAR;
+                        accuredAmount = totalOfOneYear;
+                        break;
+                    case 1:
+                        tenure = term_3;
+                        interestRate = INTEREST_RATE_3_YEARS;
+                        accuredAmount = totalOfThreeYears;
+                        break;
+                    case 2:
+                        tenure = term_5;
+                        interestRate = INTEREST_RATE_5_YEARS;
+                        accuredAmount = totalOfFiveYears;
+                        break;
+                    case 3:
+                        tenure = term_10;
+                        interestRate = INTEREST_RATE_10_YEARS;
+                        accuredAmount = totalOfTenYears;
+                        break;
+                }
+
+            }
+
+            
+
+        }
+
+        private void confirmButton_Click(object sender, EventArgs e)
+        {
+            customerName = customerNameTextBox.Text.ToString();
+            customerTelephone = customerTelephoneTextBox.Text.ToString();
+            customerEmail = customerEmailTextBox.Text.ToString();
+
+            DialogResult dialogResult =  MessageBox.Show(" Transaction Number " + transactionNumber +
+                                                         "\n Customer Name :  " + customerName + 
+                                                         "\n Customer Telephone : " + customerTelephone + 
+                                                         "\n Customer Email :  " + customerEmail+ 
+                                                         "\n Tenure of Deposit:  " + tenure + 
+                                                         "\n Interest Rate: " + interestRate + 
+                                                         "\n Total Accured Amount: " +accuredAmount, "Confirm Booking", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (dialogResult == DialogResult.Yes)
+            {
+                MessageBox.Show("Dear " + customerName + ", your investement in 'InvestMe' medium-term investement product is successfull. ", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                StreamWriter outputFile;
+
+                outputFile = File.AppendText(path);
+                outputFile.WriteLine("\n");
+                outputFile.WriteLine("Transaction Number : " + transactionNumber);
+                outputFile.WriteLine("Customer Name :" + customerName);
+                outputFile.WriteLine("Customer Telephone :" + customerTelephone);
+                outputFile.WriteLine("Customer Email :" + customerEmail);
+                outputFile.WriteLine("Tenure of the deposit :" + tenure);
+                outputFile.WriteLine("Interest Rate :" + interestRate);
+                outputFile.WriteLine("Accure Amount :" + accuredAmount);
+                outputFile.Close();
+            }
+
+            else if(dialogResult == DialogResult.No)
+            {
+                this.Close();
+            }
+        }
+
+        
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void amountTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+
+            if (!char.IsDigit(ch) && ch != 8) //this check is to make sure that user enters only numeric values investment amount textbox
+            {
+                e.Handled = true;
+            }
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            termInterestRateTable.Visible = false;
+            proceedButton.Visible = false;
+            customerDetailsGroupBox.Visible = false;
+            termLabel.Visible = false;
+            interestRateLabel.Visible = false;
+            accuredAmountLabel.Visible = false;
+        }
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void displayButton_Click(object sender, EventArgs e)
+        {
+        
+            if (!string.IsNullOrWhiteSpace(amountTextBox.Text))
+            {
+                value = decimal.Parse(amountTextBox.Text);
+                proceedButton.Visible = true;
+                termLabel.Visible = true;
+                interestRateLabel.Visible = true;
+                accuredAmountLabel.Visible = true;
+
+                if (value <= 250000)
+                {
+                     INTEREST_RATE_1_YEAR = 0.50000m;
+                     INTEREST_RATE_3_YEARS = 0.62500m;
+                     INTEREST_RATE_5_YEARS = 0.71250m;
+                     INTEREST_RATE_10_YEARS = 1.01250m;
+
+                    totalOfOneYear = Math.Round((value * (decimal)Math.Pow(1 + (double)INTEREST_RATE_1_YEAR / (12*100), 12)), 2);
+                    totalOfThreeYears = Math.Round((value * (decimal)Math.Pow(1.00 + (double)INTEREST_RATE_3_YEARS / (36*100), 108)), 2);
+                    totalOfFiveYears = Math.Round((value * (decimal)Math.Pow(1.00 + (double)INTEREST_RATE_5_YEARS / (60*100), 300)), 2);
+                    totalOfTenYears = Math.Round((value * (decimal)Math.Pow(1.00 + (double)INTEREST_RATE_10_YEARS / (120*100), 1200)), 2);
+
+                    termInterestRateTable.Items.Add(term_1+ "\t\t" +INTEREST_RATE_1_YEAR+ "\t\t" + totalOfOneYear.ToString("C"));
+                    termInterestRateTable.Items.Add(term_3 + "\t\t" +INTEREST_RATE_3_YEARS+ "\t\t" + totalOfThreeYears.ToString("C"));
+                    termInterestRateTable.Items.Add(term_5 + "\t\t" +INTEREST_RATE_5_YEARS+ "\t\t" + totalOfFiveYears.ToString("C"));
+                    termInterestRateTable.Items.Add(term_10 + "\t\t" +INTEREST_RATE_10_YEARS+ "\t\t" + totalOfTenYears.ToString("C"));
+                    termInterestRateTable.Visible = true;
+                    amountTextBox.Clear();
+                }
+
+                else if (value > 250000 && value <= 1000000)
+                {
+                    INTEREST_RATE_1_YEAR = 0.60000m;
+                    INTEREST_RATE_3_YEARS = 0.72500m;
+                    INTEREST_RATE_5_YEARS = 0.81250m;
+                    INTEREST_RATE_10_YEARS = 1.02500m;
+
+                    totalOfOneYear = Math.Round((value * (decimal)Math.Pow(1 + (double)INTEREST_RATE_1_YEAR / (12*100), 12)), 2);
+                    totalOfThreeYears = Math.Round((value * (decimal)Math.Pow(1 + (double)INTEREST_RATE_3_YEARS / (36*100), 108)), 2);
+                    totalOfFiveYears = Math.Round((value * (decimal)Math.Pow(1 + (double)INTEREST_RATE_5_YEARS / (60*100), 300)), 2);
+                    totalOfTenYears = Math.Round((value * (decimal)Math.Pow(1 + (double)INTEREST_RATE_10_YEARS / (120*100), 1200)), 2);
+
+                    termInterestRateTable.Items.Add(term_1 + "\t\t" +INTEREST_RATE_1_YEAR+ "\t\t" + totalOfOneYear.ToString("C"));
+                    termInterestRateTable.Items.Add(term_3 + "\t\t" +INTEREST_RATE_3_YEARS+ "\t\t" + totalOfThreeYears.ToString("C"));
+                    termInterestRateTable.Items.Add(term_5 + "\t\t" +INTEREST_RATE_5_YEARS+ "\t\t" + totalOfFiveYears.ToString("C"));
+                    termInterestRateTable.Items.Add(term_10 + "\t\t" +INTEREST_RATE_10_YEARS+ "\t\t" + totalOfTenYears.ToString("C"));
+                    termInterestRateTable.Visible = true;
+                    amountTextBox.Clear();
+                }
+
+                else if (value > 1000000)
+                {
+                    INTEREST_RATE_1_YEAR = 0.60000m;
+                    INTEREST_RATE_3_YEARS = 0.72500m;
+                    INTEREST_RATE_5_YEARS = 0.81250m;
+                    INTEREST_RATE_10_YEARS = 1.02500m;
+
+                    totalOfOneYear = Math.Round((value * (decimal)Math.Pow(1 + (double)INTEREST_RATE_1_YEAR / (12*100), 12)), 2);
+                    totalOfThreeYears = Math.Round((value * (decimal)Math.Pow(1 + (double)INTEREST_RATE_3_YEARS / (36*100), 108)), 2) + 25000;
+                    totalOfFiveYears = Math.Round((value * (decimal)Math.Pow(1 + (double)INTEREST_RATE_5_YEARS / (60*100), 300)), 2) + 25000;
+                    totalOfTenYears = Math.Round((value * (decimal)Math.Pow(1 + (double)INTEREST_RATE_10_YEARS / (120*100), 1200)), 2) + 25000;
+
+                    termInterestRateTable.Items.Add(term_1 + "\t\t" + INTEREST_RATE_1_YEAR + "\t\t" + totalOfOneYear.ToString("C"));
+                    termInterestRateTable.Items.Add(term_3 + "\t\t" + INTEREST_RATE_3_YEARS + "\t\t" + totalOfThreeYears.ToString("C"));
+                    termInterestRateTable.Items.Add(term_5 + "\t\t" + INTEREST_RATE_5_YEARS + "\t\t" + totalOfFiveYears.ToString("C"));
+                    termInterestRateTable.Items.Add(term_10 + "\t\t" + INTEREST_RATE_10_YEARS + "\t\t" + totalOfTenYears.ToString("C"));
+                    termInterestRateTable.Visible = true;
+                    amountTextBox.Clear();
+                }
+            }
+
+            else
+            {
+                MessageBox.Show("Amount field cannot be empty ", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                amountTextBox.Focus();
+            }
+
+        }
+    }
+}

@@ -1,0 +1,18 @@
+D:\MSc Business Analytics\Sem 1\MS806 Business Applications Programming\Assignment\Assignment 4\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+D:\MSc Business Analytics\Sem 1\MS806 Business Applications Programming\Assignment\Assignment 4\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+D:\MSc Business Analytics\Sem 1\MS806 Business Applications Programming\Assignment\Assignment 4\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+D:\MSc Business Analytics\Sem 1\MS806 Business Applications Programming\Assignment\Assignment 4\WindowsFormsApp1\obj\Debug\Assignment 4.csprojAssemblyReference.cache
+D:\MSc Business Analytics\Sem 1\MS806 Business Applications Programming\Assignment\Assignment 4\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+D:\MSc Business Analytics\Sem 1\MS806 Business Applications Programming\Assignment\Assignment 4\WindowsFormsApp1\obj\Debug\Assignment 4.csproj.GenerateResource.cache
+D:\MSc Business Analytics\Sem 1\MS806 Business Applications Programming\Assignment\Assignment 4\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+D:\MSc Business Analytics\Sem 1\MS806 Business Applications Programming\Assignment\Assignment 4\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+D:\MSc Business Analytics\Sem 1\MS806 Business Applications Programming\Assignment\Assignment 4\WindowsFormsApp1\obj\Debug\InvestMe.investMeApp.resources
+D:\MSc Business Analytics\Sem 1\MS806 Business Applications Programming\Assignment\Assignment 4\Adkar_Saurabh_Assignment4_MS806\bin\Debug\WindowsFormsApp1.exe.config
+D:\MSc Business Analytics\Sem 1\MS806 Business Applications Programming\Assignment\Assignment 4\Adkar_Saurabh_Assignment4_MS806\bin\Debug\WindowsFormsApp1.exe
+D:\MSc Business Analytics\Sem 1\MS806 Business Applications Programming\Assignment\Assignment 4\Adkar_Saurabh_Assignment4_MS806\bin\Debug\WindowsFormsApp1.pdb
+D:\MSc Business Analytics\Sem 1\MS806 Business Applications Programming\Assignment\Assignment 4\Adkar_Saurabh_Assignment4_MS806\obj\Debug\Assignment 4.csprojAssemblyReference.cache
+D:\MSc Business Analytics\Sem 1\MS806 Business Applications Programming\Assignment\Assignment 4\Adkar_Saurabh_Assignment4_MS806\obj\Debug\InvestMe.investMeApp.resources
+D:\MSc Business Analytics\Sem 1\MS806 Business Applications Programming\Assignment\Assignment 4\Adkar_Saurabh_Assignment4_MS806\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+D:\MSc Business Analytics\Sem 1\MS806 Business Applications Programming\Assignment\Assignment 4\Adkar_Saurabh_Assignment4_MS806\obj\Debug\Assignment 4.csproj.GenerateResource.cache
+D:\MSc Business Analytics\Sem 1\MS806 Business Applications Programming\Assignment\Assignment 4\Adkar_Saurabh_Assignment4_MS806\obj\Debug\WindowsFormsApp1.exe
+D:\MSc Business Analytics\Sem 1\MS806 Business Applications Programming\Assignment\Assignment 4\Adkar_Saurabh_Assignment4_MS806\obj\Debug\WindowsFormsApp1.pdb
