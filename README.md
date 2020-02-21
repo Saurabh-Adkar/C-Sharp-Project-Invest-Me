@@ -1,0 +1,2 @@
+MyMoney Bank Corp is a financial services company that offers various investment products to its customers. One of these is a medium-term investment product called ‘InvestMe’, in which a client invests a principal sum of money and receive returns depending on the amount and duration of the Investment (terms ranging from 1 to 10 years). Its a well-designed application for bank employees to process client transactions for this product. 
+ 
